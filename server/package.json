@@ -6,6 +6,10 @@
   "repository": "https://github.com/deborapatrao/react-graphql.git",
   "author": "Debora Correia",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./server.js --exec babel-node -e js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "@apollo/server": "^4.3.2",
     "apollo-server-express": "^3.11.1",
