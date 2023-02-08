@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Button, Form, Input } from 'antd'
+import { useMutation } from '@apollo/client'
+import { ADD_CONTACT, GET_CONTACTS } from '../../queries'
 
 const AddContact = () => {
     const [id] = useState(uuidv4())
+    const [addContact] = useMutation(ADD_CONTACT)
     const [form] = Form.useForm()
     const[,forceUpdate] = useState()
 
@@ -12,7 +15,25 @@ const AddContact = () => {
     }, [])
 
     const onFinish = values => {
-        console.log('values: ', values)
+        const { firstName, lastName } = values
+
+        addContact({
+            variables: {
+                id,
+                firstName,
+                lastName
+              },
+              update: (cache, {data:{addContact}}) => {
+                const data = cache.readQuery({ query: GET_CONTACTS })
+                cache.writeQuery({
+                    query: GET_CONTACTS,
+                    data:{
+                        ...data,
+                        contacts: [...data.contacts, addContact]
+                    }
+                })
+              }
+        })
     }
 
 return(
@@ -27,7 +48,7 @@ return(
             <Input placeholder='i.e. John'/>
         </Form.Item>
 
-        <Form.Item name='LastName' rules={[{required:true, message:'Please input last name!'}]}>
+        <Form.Item name='lastName' rules={[{required:true, message:'Please input last name!'}]}>
             <Input placeholder='i.e. Smith'/>
         </Form.Item>
 

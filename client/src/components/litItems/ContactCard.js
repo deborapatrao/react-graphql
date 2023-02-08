@@ -1,4 +1,6 @@
 import { Card } from "antd"
+import { EditOutlined } from '@ant-design/icons'
+import RemoveContact from "../buttons/RemoveContact"
 
 const getStyles = () => ({
     card:{
@@ -14,7 +16,10 @@ const ContactCard = props => {
 
 
     return(
-        <Card style={styles.card}>
+        <Card style={styles.card}
+        actions={[
+            <EditOutlined key='edit'/>, <RemoveContact />
+        ]}>
             {firstName} {lastName}
         </Card>
     )
