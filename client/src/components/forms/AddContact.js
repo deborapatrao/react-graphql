@@ -11,18 +11,23 @@ const AddContact = () => {
         forceUpdate([])
     }, [])
 
+    const onFinish = values => {
+        console.log('values: ', values)
+    }
+
 return(
     <Form 
     name='add-contact-form'
     form={form}
     layout='inline'
+    onFinish={onFinish}
     size='large'
     style={{marginBottom: '40px'}}>
         <Form.Item name='firstName' rules={[{required:true, message:'Please input your first name!'}]}>
             <Input placeholder='i.e. John'/>
         </Form.Item>
 
-        <Form.Item name='LasttName' rules={[{required:true, message:'Please input last name!'}]}>
+        <Form.Item name='LastName' rules={[{required:true, message:'Please input last name!'}]}>
             <Input placeholder='i.e. Smith'/>
         </Form.Item>
 
