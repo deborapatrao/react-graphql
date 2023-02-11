@@ -11,7 +11,10 @@ const getStyles = () => ({
 })
 
 const ContactCard = props => {
-    const {id, firstName, lastName} = props
+    const [id] = useState(props.id)
+    const [firstName, setFirstName] = useState(props.firstName)
+    const [lastName, setLastName] = useState(props.lastName)
+
     const styles = getStyles()
 
     const [editMode, setEditMode] = useState(false)
@@ -19,11 +22,31 @@ const ContactCard = props => {
     const handleButtonClick = () => {
         setEditMode(!editMode)
     }
- 
+
+    const updateStateVariable = (variable, value) => {
+        switch(variable){
+            case 'firstName':
+            setFirstName(value)
+            break
+
+            case 'lastName':
+            setLastName(value)
+            break
+
+            default:
+                break
+        }
+    }
 
     return(
         <div>
-            {editMode ? (<UpdateContact onButtonClick={handleButtonClick} />) : (
+            {editMode ? (<UpdateContact 
+            id={props.id}
+            firstName={props.firstName}
+            lastName={props.lastName}
+            onButtonClick={handleButtonClick} 
+            updateStateVariable={updateStateVariable}
+            />) : (
                 <Card style={styles.card}
                 actions={[
                     <EditOutlined key='edit' onClick={handleButtonClick}/>, <RemoveContact id={id}/>

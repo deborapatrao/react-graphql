@@ -19,6 +19,16 @@ export const ADD_CONTACT = gql`
     }
 `
 
+export const UPDTADE_CONTACT = gql`
+    mutation UpdateContact($id: String!, $firstName: String!, $lastName: String!) {
+        updateContact(id: $id, firstName: $firstName, lastName: $lastName){
+            id
+            firstName
+            lastName
+        }
+    }
+`
+
 export const REMOVE_CONTACT = gql`
     mutation RemoveContact($id: String!){
         removeContact(id: $id){
