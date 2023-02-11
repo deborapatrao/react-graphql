@@ -26,7 +26,7 @@ const ContactCard = props => {
             {editMode ? (<UpdateContact onButtonClick={handleButtonClick} />) : (
                 <Card style={styles.card}
                 actions={[
-                    <EditOutlined key='edit' onClick={handleButtonClick}/>, <RemoveContact />
+                    <EditOutlined key='edit' onClick={handleButtonClick}/>, <RemoveContact id={id}/>
                 ]}>
                     {firstName} {lastName}
                 </Card>
